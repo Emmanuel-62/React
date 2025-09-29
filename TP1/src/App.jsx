@@ -5,6 +5,7 @@ import UserRoleRow from "./components/users/UserRoleRow.jsx";
 import PropTypes from "prop-types";
 import {useState} from "react";
 import USERS from "./data/users.js";
+import React from "react";
 
 function App () {
 
@@ -95,7 +96,9 @@ UserTable.propTypes = {
 
 SearchBar.propTypes = {
     showRoleOnly: PropTypes.bool.isRequired,
-    onRoleOnlyChange: PropTypes.func
+    onRoleOnlyChange: PropTypes.func,
+    search: PropTypes.string,
+    onSearchChange: PropTypes.func
 }
 
 export default App
