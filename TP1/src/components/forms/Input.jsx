@@ -9,9 +9,11 @@ function Input ({placeholder, value, id, onChange}) {
     return <div>
         <input
             id={id}
-            name="text"
-            placeholder={placeholder}
+            type="text"
+            name="search"
             value={value}
+            className="input-group mb-3 form-control"
+            placeholder={placeholder}
             onChange={(e) => onChange(e.target.value)}
         />
     </div>
