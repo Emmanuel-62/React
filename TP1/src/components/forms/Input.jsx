@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 /**
  * @param {string} placeholder
  * @param {string} value
@@ -6,7 +9,7 @@
  * @returns {JSX.Element}
  */
 function Input ({placeholder, value, id, onChange}) {
-    return <div>
+    return (<div>
         <input
             id={id}
             type="text"
@@ -16,7 +19,13 @@ function Input ({placeholder, value, id, onChange}) {
             placeholder={placeholder}
             onChange={(e) => onChange(e.target.value)}
         />
-    </div>
+    </div>);
 }
 
+Input.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    value: PropTypes.string,
+    id: PropTypes.string,
+}
 export default Input
