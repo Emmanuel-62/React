@@ -1,9 +1,9 @@
-import React from "react";
 import Input from "./components/forms/Input.jsx";
 import Checkbox from "./components/forms/Checkbox.jsx";
 import UserRow from "./components/users/UserRow.jsx";
 import UserRoleRow from "./components/users/UserRoleRow.jsx";
 import PropTypes from "prop-types";
+import {useState} from "react";
 
 const USERS = [
     { role: "Admin", name: "Alice", age: 30, active: true, email: "alice@example.com" },
@@ -30,24 +30,48 @@ const USERS = [
 
 
 function App () {
+
+    const [showRoleOnly, setShowRoleOnly] = useState(false)
+    const [search, setSearch] = useState('')
+
+    const visibleUsers = USERS.filter((user) => {
+        if(showRoleOnly && !user.active) {
+            return false
+        }
+
+        if(search && !user.name.includes(search)){
+            return false
+        }
+        return true
+    })
+
     return (<div className="container">
         <h1>TP1 with React</h1>
-        <SearchBar/>
-        <UserTable users={USERS}/>
+        <SearchBar
+            showRoleOnly={showRoleOnly}
+            onRoleOnlyChange={setShowRoleOnly}
+            search={search}
+            onSearchChange={setSearch}
+        />
+        <UserTable users={visibleUsers}/>
     </div>);
 }
 
-function SearchBar () {
+function SearchBar ({showRoleOnly, onRoleOnlyChange, search, onSearchChange}) {
     return (
         <div>
             <div>
                 <Input
                     id="search"
                     placeholder="Rechercher..."
-                    onChange={() => null}
-                    value=""
+                    onChange={onSearchChange}
+                    value={search}
                 />
-                <Checkbox id="checked" label="N'affiche que les personnes disponible" onChanges={() => null} checked={true}/>
+                <Checkbox
+                    id="checked"
+                    label="N'affiche que les personnes disponible"
+                    onChanges={onRoleOnlyChange}
+                    checked={showRoleOnly}/>
             </div>
         </div>
     );
@@ -90,6 +114,11 @@ UserTable.propTypes = {
     users: PropTypes.shape({
         role: PropTypes.array.isRequired
     })
+}
+
+SearchBar.propTypes = {
+    showRoleOnly: PropTypes.bool.isRequired,
+    onRoleOnlyChange: PropTypes.func
 }
 
 export default App
