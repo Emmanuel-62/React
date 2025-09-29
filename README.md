@@ -39,3 +39,8 @@ npm run lint
 # Pour corriger automatiquement les erreurs simples :
 npm run lint -- --fix
 ```
+
+- Installation PropTypes
+```bash
+npm install prop-types
+```

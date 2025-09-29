@@ -8,9 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext .js,.jsx"
-
   },
   "dependencies": {
+    "prop-types": "^15.8.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
