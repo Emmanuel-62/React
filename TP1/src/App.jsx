@@ -17,10 +17,8 @@ function App () {
             return false
         }
 
-        if(search && !user.name.includes(search)){
-            return false
-        }
-        return true
+        return !(search && !user.name.includes(search));
+
     })
 
     return (<div className="container">
@@ -89,9 +87,7 @@ function UserTable ({users}) {
 }
 
 UserTable.propTypes = {
-    users: PropTypes.shape({
-        role: PropTypes.array.isRequired
-    })
+    users: PropTypes.array.isRequired
 }
 
 SearchBar.propTypes = {
