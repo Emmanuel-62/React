@@ -6,18 +6,25 @@ import PropTypes from "prop-types";
 import {useState} from "react";
 import USERS from "./data/users.js";
 import React from "react";
+import InputRange from "./components/forms/InputRange.jsx";
 
 function App () {
 
     const [showRoleOnly, setShowRoleOnly] = useState(false)
     const [search, setSearch] = useState('')
+    const [rangeAge, setRangeAge] = useState(18)
 
     const visibleUsers = USERS.filter((user) => {
         if(showRoleOnly && !user.active) {
             return false
         }
 
+        if(user.age < rangeAge) {
+            return false
+        }
+
         return !(search && !user.name.includes(search));
+
 
     })
 
@@ -28,12 +35,14 @@ function App () {
             onRoleOnlyChange={setShowRoleOnly}
             search={search}
             onSearchChange={setSearch}
+            rangeAge={rangeAge}
+            onRangeChange={setRangeAge}
         />
         <UserTable users={visibleUsers}/>
     </div>);
 }
 
-function SearchBar ({showRoleOnly, onRoleOnlyChange, search, onSearchChange}) {
+function SearchBar ({showRoleOnly, onRoleOnlyChange, search, onSearchChange, rangeAge, onRangeChange}) {
     return (
         <div>
             <div>
@@ -43,11 +52,18 @@ function SearchBar ({showRoleOnly, onRoleOnlyChange, search, onSearchChange}) {
                     onChange={onSearchChange}
                     value={search}
                 />
+                <InputRange
+                    min={18}
+                    max={50}
+                    value={rangeAge}
+                    onChange={onRangeChange}
+                />
                 <Checkbox
                     id="checked"
                     label="N'affiche que les personnes disponible"
                     onChanges={onRoleOnlyChange}
-                    checked={showRoleOnly}/>
+                    checked={showRoleOnly}
+                />
             </div>
         </div>
     );
@@ -92,9 +108,11 @@ UserTable.propTypes = {
 
 SearchBar.propTypes = {
     showRoleOnly: PropTypes.bool.isRequired,
-    onRoleOnlyChange: PropTypes.func,
+    onRoleOnlyChange: PropTypes.func.isRequired,
     search: PropTypes.string,
-    onSearchChange: PropTypes.func
+    onSearchChange: PropTypes.func,
+    rangeAge: PropTypes.number,
+    onRangeChange: PropTypes.func.isRequired
 }
 
 export default App
