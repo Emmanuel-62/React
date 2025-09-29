@@ -1,8 +1,9 @@
-import React, {use} from "react";
+import React from "react";
 import Input from "./components/forms/Input.jsx";
 import Checkbox from "./components/forms/Checkbox.jsx";
 import UserRow from "./components/users/UserRow.jsx";
 import UserRoleRow from "./components/users/UserRoleRow.jsx";
+import PropTypes from "prop-types";
 
 const USERS = [
     { role: "Admin", name: "Alice", age: 30, active: true, email: "alice@example.com" },
@@ -83,6 +84,12 @@ function UserTable ({users}) {
             </tbody>
         </table>
     );
+}
+
+UserTable.propTypes = {
+    users: PropTypes.shape({
+        role: PropTypes.array.isRequired
+    })
 }
 
 export default App
