@@ -5,6 +5,10 @@ import {useEffect, useState} from "react";
  * @param {{}} options
  * @returns {{loading: boolean, data: any, error: any}}
  */
+
+export  const BaseUrl = "https://jsonplaceholder.typicode.com/posts?_limit=10&_delay=4000"
+
+
 function useFetch(url, options = {}) {
 
     const [loading, setLoading] = useState(true)
