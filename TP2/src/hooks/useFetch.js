@@ -3,10 +3,10 @@ import {useEffect, useState} from "react";
 /**
  * @param { string } url
  * @param {{}} options
- * @returns {{loading: boolean, data: any, error: any}}
+ * @returns {{loading: boolean, data: Array<Object>|null, error: any}}
  */
 
-export  const BaseUrl = "https://jsonplaceholder.typicode.com/posts?_limit=10&_delay=4000"
+export  const BaseUrl = "https://jsonplaceholder.typicode.com/users?_limit=10&_delay=2000"
 
 
 function useFetch(url, options = {}) {
